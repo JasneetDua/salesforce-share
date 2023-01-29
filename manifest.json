@@ -9,5 +9,34 @@
         "32": "images/icons/icon-32.png",
         "48": "images/icons/icon-48.png",
         "128": "images/icons/icon-128.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.salesforce.com/*",
+                "https://*.force.com/*"
+            ],
+            "js": [
+                "./scripts/lib/sweetalert2.all.min.js",
+                "./scripts/content.js"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module",
+        "persistance": false
+    },
+    "action": {
+        "default_icon": "images/icons/icon-16.png"
+    },
+    "permissions": [
+        "tabs",
+        "cookies",
+        "contextMenus"
+    ],
+    "host_permissions": [
+        "https://*.salesforce.com/",
+        "https://*.force.com/"
+    ]
 }
