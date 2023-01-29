@@ -1,7 +1,7 @@
 import { CONSTANTS } from './const.js';
 
-const getSessionUrl = (cookie) => {
-    const sessionUrl = `https://${cookie.domain}/secur/frontdoor.jsp?sid=${cookie.value}`;
+const getSessionUrl = (cookie, retURL) => {
+    const sessionUrl = `https://${cookie.domain}/secur/frontdoor.jsp?sid=${cookie.value}&retURL=${retURL}`;
     return sessionUrl;
 }
 

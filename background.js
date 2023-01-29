@@ -18,7 +18,8 @@ const shareSalesforce = async (config = {}) => {
             });
             if (cookie) {
                 try {
-                    const sessionUrl = getSessionUrl(cookie);
+                    const returnUrl = config.currentPage ? activeTabs[0].url : '';
+                    const sessionUrl = getSessionUrl(cookie, returnUrl);
                     const copied = await chrome.tabs.sendMessage(activeTabs[0].id, { action: CONSTANTS.COPY_TO_CLIP, content: sessionUrl });
                     if (copied) {
                         showToast(activeTabs[0].id, 'Copied to Clipboard!');
@@ -65,7 +66,7 @@ CONTEXT_MENU_COMMANDS.forEach((command) => {
 // context menu listener
 chrome.contextMenus.onClicked.addListener((request) => {
     if (request.menuItemId == CONSTANTS.SHARE_HOME_PAGE) {
-        shareSalesforce();
+        shareSalesforce({ homePage: true });
     }
     else if (request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
         shareSalesforce({ currentPage: true });
@@ -74,7 +75,7 @@ chrome.contextMenus.onClicked.addListener((request) => {
 
 
 const pageActionHandler = () => {
-    shareSalesforce();
+    shareSalesforce({ homePage: true });
 }
 
 // will listen for click of toolbar extension icon
