@@ -3,31 +3,31 @@ import { getSessionUrl, showToast } from './scripts/utils.js';
 
 const shareSalesforce = async (config = {}) => {
     // get active page
-    let params = { 
-        active: true, 
-        currentWindow: true 
+    let params = {
+        active: true,
+        currentWindow: true
     };
     const activeTabs = await chrome.tabs.query(params);
 
-    if(activeTabs && activeTabs.length) {
+    if (activeTabs && activeTabs.length) {
         const orgId = await chrome.tabs.sendMessage(activeTabs[0].id, { action: CONSTANTS.GET_ORG_ID });
-        if(orgId){
+        if (orgId) {
             const cookies = await chrome.cookies.getAll({ name: 'sid' });
             const cookie = cookies.find((cookie) => {
                 return cookie.value.startsWith(orgId) && cookie.domain.includes('.my.salesforce.com');
             });
-            if(cookie){
+            if (cookie) {
                 try {
                     const sessionUrl = getSessionUrl(cookie);
                     const copied = await chrome.tabs.sendMessage(activeTabs[0].id, { action: CONSTANTS.COPY_TO_CLIP, content: sessionUrl });
-                    if(copied){
+                    if (copied) {
                         showToast(activeTabs[0].id, 'Copied to Clipboard!');
                     }
                     else {
                         showToast(activeTabs[0].id, 'Error copying the URL. Please try again later!', true);
                     }
                 }
-                catch(ex) {
+                catch (ex) {
                     console.log(ex);
                     showToast(activeTabs[0].id, 'Something went wrong!', true);
                 }
@@ -54,8 +54,8 @@ const shareSalesforce = async (config = {}) => {
 
 // context menu creation
 const CONTEXT_MENU_COMMANDS = [
-    { id: CONSTANTS.SHARE_HOME_PAGE, title: 'Home Page', contexts: ['all']}, 
-    { id: CONSTANTS.SHARE_CURRENT_PAGE, title: 'Current Page', contexts: ['all']}
+    { id: CONSTANTS.SHARE_HOME_PAGE, title: 'Home Page', contexts: ['all'] },
+    { id: CONSTANTS.SHARE_CURRENT_PAGE, title: 'Current Page', contexts: ['all'] }
 ];
 
 CONTEXT_MENU_COMMANDS.forEach((command) => {
@@ -64,11 +64,11 @@ CONTEXT_MENU_COMMANDS.forEach((command) => {
 
 // context menu listener
 chrome.contextMenus.onClicked.addListener((request) => {
-    if(request.menuItemId == CONSTANTS.SHARE_HOME_PAGE){
+    if (request.menuItemId == CONSTANTS.SHARE_HOME_PAGE) {
         shareSalesforce();
     }
-    else if(request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
-        
+    else if (request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
+        shareSalesforce({ currentPage: true });
     }
 });
 
