@@ -24,7 +24,7 @@ const shareSalesforce = async (config = {}) => {
                         showToast(activeTabs[0].id, 'Copied to Clipboard!');
                     }
                     else {
-                        // TODO: error in copy
+                        showToast(activeTabs[0].id, 'Error copying the URL. Please try again later!', true);
                     }
                 }
                 catch(ex) {
@@ -38,7 +38,7 @@ const shareSalesforce = async (config = {}) => {
             }
         }
         else {
-            // TODO: org id not found
+            showToast(activeTabs[0].id, 'Action not available!', true);
         }
     }
     else {
