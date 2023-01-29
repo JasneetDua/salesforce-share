@@ -59,20 +59,25 @@ const CONTEXT_MENU_COMMANDS = [
     { id: CONSTANTS.SHARE_CURRENT_PAGE, title: 'Current Page', contexts: ['all'] }
 ];
 
-CONTEXT_MENU_COMMANDS.forEach((command) => {
-    chrome.contextMenus.create(command);
-});
+const createContextMenu = () => {
+    CONTEXT_MENU_COMMANDS.forEach((command) => {
+        chrome.contextMenus.create(command);
+    });
 
-// context menu listener
-chrome.contextMenus.onClicked.addListener((request) => {
-    if (request.menuItemId == CONSTANTS.SHARE_HOME_PAGE) {
-        shareSalesforce({ homePage: true });
-    }
-    else if (request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
-        shareSalesforce({ currentPage: true });
-    }
-});
+    // context menu listener
+    chrome.contextMenus.onClicked.addListener((request) => {
+        if (request.menuItemId == CONSTANTS.SHARE_HOME_PAGE) {
+            shareSalesforce({ homePage: true });
+        }
+        else if (request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
+            shareSalesforce({ currentPage: true });
+        }
+    });
+}
 
+const removeContextMenu = () => {
+    chrome.contextMenus.removeAll();
+}
 
 const pageActionHandler = () => {
     shareSalesforce({ homePage: true });
