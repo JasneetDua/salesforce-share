@@ -33,7 +33,8 @@
     "permissions": [
         "tabs",
         "cookies",
-        "contextMenus"
+        "contextMenus",
+        "notifications"
     ],
     "host_permissions": [
         "https://*.salesforce.com/",

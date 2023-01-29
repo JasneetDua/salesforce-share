@@ -42,7 +42,13 @@ const shareSalesforce = async (config = {}) => {
         }
     }
     else {
-        // TODO: to show notification if no active salesforce tab found error
+        const config = {
+            type: 'basic',
+            iconUrl: './images/icons/icon-128.png',
+            title: 'Notification',
+            message: 'Strange, No active salesforce tab found!'
+        };
+        chrome.notifications.create('SalesforceShare' + (new Date().getTime()), config);
     }
 }
 
