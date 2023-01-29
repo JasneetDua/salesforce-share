@@ -52,6 +52,27 @@ const shareSalesforce = async (config = {}) => {
     }
 }
 
+// context menu creation
+const CONTEXT_MENU_COMMANDS = [
+    { id: CONSTANTS.SHARE_HOME_PAGE, title: 'Home Page', contexts: ['all']}, 
+    { id: CONSTANTS.SHARE_CURRENT_PAGE, title: 'Current Page', contexts: ['all']}
+];
+
+CONTEXT_MENU_COMMANDS.forEach((command) => {
+    chrome.contextMenus.create(command);
+});
+
+// context menu listener
+chrome.contextMenus.onClicked.addListener((request) => {
+    if(request.menuItemId == CONSTANTS.SHARE_HOME_PAGE){
+        shareSalesforce();
+    }
+    else if(request.menuItemId == CONSTANTS.SHARE_CURRENT_PAGE) {
+        
+    }
+});
+
+
 const pageActionHandler = () => {
     shareSalesforce();
 }
