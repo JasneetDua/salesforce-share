@@ -60,6 +60,7 @@ const CONTEXT_MENU_COMMANDS = [
 ];
 
 const createContextMenu = () => {
+    removeContextMenu();
     CONTEXT_MENU_COMMANDS.forEach((command) => {
         chrome.contextMenus.create(command);
     });
@@ -85,3 +86,26 @@ const pageActionHandler = () => {
 
 // will listen for click of toolbar extension icon
 chrome.action.onClicked.addListener(pageActionHandler);
+
+
+const activateExtension = async(tabId, d, activeTab) => {
+    const urlObj = new URL(activeTab.url);
+    const origin = urlObj.origin.toLowerCase();
+
+    if(origin && (origin.endsWith('salesforce.com') || origin.endsWith('force.com'))){
+        const orgId = await chrome.tabs.sendMessage(tabId, { action: CONSTANTS.GET_ORG_ID });
+        if(orgId && orgId.startsWith('00D')){
+            chrome.action.enable(tabId);
+            createContextMenu();
+        }
+        else {
+            chrome.action.disable(tabId);
+            removeContextMenu();
+        }
+    }
+    else {
+        chrome.action.disable(tabId);
+        removeContextMenu();
+    }
+}
+chrome.tabs.onUpdated.addListener(activateExtension);
