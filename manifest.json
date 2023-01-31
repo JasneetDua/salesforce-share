@@ -28,7 +28,9 @@
         "persistance": false
     },
     "action": {
-        "default_icon": "images/icons/icon-16.png"
+        "default_icon": "images/icons/icon-16.png",
+        "default_popup": "popup/index.html",
+        "default_title": "Salesforce Share - Generate Session URL"
     },
     "permissions": [
         "tabs",
