@@ -1,0 +1,18 @@
+
+.share-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.share-item__label {
+    font-size: 17px;
+}
+.share-item__copy-icon svg {
+    color: #999;
+    cursor: pointer;
+    width: 24px;
+}
+
+.share-item__copy-icon:hover svg {
+    color: #1798c1;
+}
