@@ -8,8 +8,11 @@
         <!-- active page ends here -->
         <!-- other active session starts here -->
         <c-card card-title="Active Orgs">
-            <c-share-item url-label="Org 1" url-value="test"></c-share-item>
-            <c-share-item url-label="Org 2" url-value="test2"></c-share-item>
+            <template if:true={shareItems} for:each={shareItems} for:item="shareItem" for:index="index">
+               <div key={shareItem.domain}>
+                   <c-share-item url-label={shareItem.domain} url-value="test"></c-share-item>
+               </div>
+            </template>
         </c-card>
         <!-- other active session ends here -->
     </div>
