@@ -108,4 +108,4 @@ const activateExtension = async(tabId, d, activeTab) => {
         removeContextMenu();
     }
 }
-chrome.tabs.onUpdated.addListener(activateExtension);
+// chrome.tabs.onUpdated.addListener(activateExtension);
