@@ -8,13 +8,15 @@
                         <c-share-item label="Home Page" session={currentOrgCookie}></c-share-item>
                         <c-share-item label="Active Page" session={currentOrgCookie} ret-url={activePageUrl}></c-share-item>
                     </c-card>
-                    <c-card card-title="Active Orgs">
-                        <template if:true={otherActiveOrgCookies} for:each={otherActiveOrgCookies} for:item="otherActiveOrgCookie">
-                            <div key={otherActiveOrgCookie.value}>
-                                <c-share-item session={otherActiveOrgCookie}></c-share-item>
-                            </div>
-                        </template>
-                    </c-card>
+                    <template if:true={haveOtherActiveOrgCookies}>
+                        <c-card card-title="Active Orgs">
+                            <template if:true={otherActiveOrgCookies} for:each={otherActiveOrgCookies} for:item="otherActiveOrgCookie">
+                                <div key={otherActiveOrgCookie.value}>
+                                    <c-share-item session={otherActiveOrgCookie}></c-share-item>
+                                </div>
+                            </template>
+                        </c-card>
+                    </template>
                 </template>
                 <!-- active page ends here -->
 

@@ -17,6 +17,10 @@ export default class Popup extends LightningElement {
     get haveActiveSessions(){
         return this.activeOrgCookies && this.activeOrgCookies.length;
     }
+    
+    get haveOtherActiveOrgCookies(){
+        return this.otherActiveOrgCookies && this.otherActiveOrgCookies.length;
+    }
 
     get activePageUrl(){
         return this.activeTabs && this.activeTabs.length && this.activeTabs[0].url;

@@ -9,13 +9,14 @@ export default class ShareItem extends LightningElement {
 
     @track labelToRender;
     @track subLabelToRender;
+    @track copied = false;
 
     connectedCallback() {
         if (this.label) {
             this.labelToRender = this.label;
             this.subLabelToRender = this.subLabel;
         }
-        else{
+        else {
             const myDomain = this.session.domain.replace('.my.salesforce.com', '');
             const domainElements = myDomain.split('--');
             if (domainElements.length > 1) {
@@ -31,7 +32,32 @@ export default class ShareItem extends LightningElement {
 
 
     getSessionUrl(session, retURL) {
-        const sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL}`;
+        const sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL? retURL : ''}`;
         return sessionUrl;
+    }
+
+    handleCopy(event) {
+        this.showTip();
+        const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
+        this.copyToClip(generatedUrl);
+    }
+
+    showTip() {
+        this.copied = true;
+        setTimeout(() => {
+            this.copied = false;
+        }, 1000);
+    }
+
+    copyToClip(value) {
+        const el = document.createElement('textarea');
+        el.value = value;
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.focus();
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
     }
 }
