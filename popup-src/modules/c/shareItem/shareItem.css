@@ -2,11 +2,22 @@
 .share-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
+}
+
+.share-item__label-wrap {
+
 }
 .share-item__label {
     font-size: 17px;
 }
+.share-item__sub-label {
+    font-size: 14px;
+    color: #777;
+    margin-top: 6px;
+}
+
 .share-item__copy-icon svg {
     color: #999;
     cursor: pointer;

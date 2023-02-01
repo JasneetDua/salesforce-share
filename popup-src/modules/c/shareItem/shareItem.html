@@ -1,6 +1,9 @@
 <template>
     <div class="share-item">
-        <div class="share-item__label">{urlLabel}</div>
+        <div class="share-item__label-wrap">
+            <div class="share-item__label">{labelToRender}</div>
+            <div class="share-item__sub-label" if:true={sublabelToRender}>{sublabelToRender}</div>
+        </div>
         <div class="share-item__copy-icon">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
                 <path fill="currentColor" d="M44,2H18c-2.2,0-4,1.8-4,4v2h24c2.2,0,4,1.8,4,4v28h2c2.2,0,4-1.8,4-4V6C48,3.8,46.2,2,44,2z" />
