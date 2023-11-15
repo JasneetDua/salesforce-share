@@ -6,10 +6,14 @@ export default class ShareItem extends LightningElement {
     @api subLabel;
     @api session;
     @api retUrl;
+    @api hideAccessKey = false;
 
     @track labelToRender;
     @track subLabelToRender;
-    @track copied = false;
+    @track copied = {
+        shareLink: false,
+        accessKey: false,
+    };
 
     connectedCallback() {
         if (this.label) {
@@ -32,20 +36,33 @@ export default class ShareItem extends LightningElement {
 
 
     getSessionUrl(session, retURL) {
-        const sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL? retURL : ''}`;
+        let sessionUrl = '';
+        if(retURL){
+            sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL? retURL : ''}`;
+        }
+        else {
+            sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}`;
+        }
         return sessionUrl;
     }
 
     handleCopy(event) {
-        this.showTip();
-        const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
-        this.copyToClip(generatedUrl);
+        const actionName = event.currentTarget.dataset.name;
+        if(actionName == 'shareLink'){
+            const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
+            this.copyToClip(generatedUrl);
+            this.showTip(actionName);
+        }
+        else if(actionName == 'accessKey'){
+            this.copyToClip(this.session.value);
+            this.showTip(actionName);
+        }
     }
 
-    showTip() {
-        this.copied = true;
+    showTip(name) {
+        this.copied[name] = true;
         setTimeout(() => {
-            this.copied = false;
+            this.copied[name] = false;
         }, 1000);
     }
 
