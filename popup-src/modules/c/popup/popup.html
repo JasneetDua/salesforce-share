@@ -9,7 +9,7 @@
                         <c-share-item label="Active Page" session={currentOrgCookie} ret-url={activePageUrl}></c-share-item>
                     </c-card>
                     <template if:true={haveOtherActiveOrgCookies}>
-                        <c-card card-title="Active Orgs">
+                        <c-card card-title="Other Active Orgs">
                             <template if:true={otherActiveOrgCookies} for:each={otherActiveOrgCookies} for:item="otherActiveOrgCookie">
                                 <div key={otherActiveOrgCookie.value}>
                                     <c-share-item session={otherActiveOrgCookie}></c-share-item>
