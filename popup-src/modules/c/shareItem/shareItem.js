@@ -32,7 +32,13 @@ export default class ShareItem extends LightningElement {
 
 
     getSessionUrl(session, retURL) {
-        const sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL? retURL : ''}`;
+        let sessionUrl = '';
+        if(retURL){
+            sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}&retURL=${retURL? retURL : ''}`;
+        }
+        else {
+            sessionUrl = `https://${session.domain}/secur/frontdoor.jsp?sid=${session.value}`;
+        }
         return sessionUrl;
     }
 
