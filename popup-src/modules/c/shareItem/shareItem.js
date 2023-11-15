@@ -6,11 +6,13 @@ export default class ShareItem extends LightningElement {
     @api subLabel;
     @api session;
     @api retUrl;
+    @api hideAccessKey = false;
 
     @track labelToRender;
     @track subLabelToRender;
     @track copied = {
         shareLink: false,
+        accessKey: false,
     };
 
     connectedCallback() {
@@ -45,9 +47,16 @@ export default class ShareItem extends LightningElement {
     }
 
     handleCopy(event) {
-        this.showTip(event.currentTarget.dataset.name);
-        const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
-        this.copyToClip(generatedUrl);
+        const actionName = event.currentTarget.dataset.name;
+        if(actionName == 'shareLink'){
+            const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
+            this.copyToClip(generatedUrl);
+            this.showTip(actionName);
+        }
+        else if(actionName == 'accessKey'){
+            this.copyToClip(this.session.value);
+            this.showTip(actionName);
+        }
     }
 
     showTip(name) {

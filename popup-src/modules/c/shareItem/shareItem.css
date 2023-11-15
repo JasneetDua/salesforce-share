@@ -21,11 +21,14 @@
 
 /* actions */
 .share-item__action-list {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .share-item__action {
     position: relative;
+    margin: 0 4px;
 }
 
 .share-item__action-status {
