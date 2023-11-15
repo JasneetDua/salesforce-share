@@ -9,7 +9,9 @@ export default class ShareItem extends LightningElement {
 
     @track labelToRender;
     @track subLabelToRender;
-    @track copied = false;
+    @track copied = {
+        shareLink: false,
+    };
 
     connectedCallback() {
         if (this.label) {
@@ -43,15 +45,15 @@ export default class ShareItem extends LightningElement {
     }
 
     handleCopy(event) {
-        this.showTip();
+        this.showTip(event.currentTarget.dataset.name);
         const generatedUrl = this.getSessionUrl(this.session, this.retUrl);
         this.copyToClip(generatedUrl);
     }
 
-    showTip() {
-        this.copied = true;
+    showTip(name) {
+        this.copied[name] = true;
         setTimeout(() => {
-            this.copied = false;
+            this.copied[name] = false;
         }, 1000);
     }
 

@@ -6,6 +6,7 @@
     margin-top: 10px;
 }
 
+/* label */
 .share-item__label-wrap {
 
 }
@@ -18,11 +19,16 @@
     margin-top: 6px;
 }
 
-.share-item__copy {
+/* actions */
+.share-item__action-list {
+
+}
+
+.share-item__action {
     position: relative;
 }
 
-.share-item__copy-text {
+.share-item__action-status {
     transform: translatex(-50%) translatey(-100%);
     position: absolute;
     top: -8px;
@@ -36,7 +42,7 @@
     padding: 4px 8px;
 }
 
-.share-item__copy-text:after {
+.share-item__action-status:after {
     content: "";
     display: block;
     position: absolute;
@@ -52,12 +58,12 @@
 
 
 
-.share-item__copy-icon svg {
+.share-item__action-icon svg {
     color: #999;
     cursor: pointer;
     width: 24px;
 }
 
-.share-item__copy-icon:hover svg {
+.share-item__action-icon:hover svg {
     color: #009388;
 }
