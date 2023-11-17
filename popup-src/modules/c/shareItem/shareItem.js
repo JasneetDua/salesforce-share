@@ -7,6 +7,7 @@ export default class ShareItem extends LightningElement {
     @api session;
     @api retUrl;
     @api hideAccessKey = false;
+    @api hideOpenAction = false;
 
     @track labelToRender;
     @track subLabelToRender;
@@ -57,6 +58,11 @@ export default class ShareItem extends LightningElement {
             this.copyToClip(this.session.value);
             this.showTip(actionName);
         }
+    }
+
+    handleOpen(){
+        const baseUrl = `https://${this.session.domain}`;
+        window.open(baseUrl);
     }
 
     showTip(name) {
