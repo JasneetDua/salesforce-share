@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Salesforce Share",
-    "version": "0.0.0.1",
+    "version": "0.0.0.2",
     "description": "A browser extension that will allow sharing session-based Salesforce URLs for direct login.",
     "author": "Jasneet Dua (jasneetdua96@gmail.com)",
     "icons": {
