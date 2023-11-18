@@ -14,7 +14,8 @@
         {
             "matches": [
                 "https://*.salesforce.com/*",
-                "https://*.force.com/*"
+                "https://*.force.com/*",
+                "https://*.site.com/*"
             ],
             "js": [
                 "./scripts/content.js"
@@ -32,6 +33,7 @@
     ],
     "host_permissions": [
         "https://*.salesforce.com/",
-        "https://*.force.com/"
+        "https://*.force.com/",
+        "https://*.site.com/"
     ]
 }

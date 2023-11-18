@@ -47,7 +47,7 @@ export default class Popup extends LightningElement {
         // get all active sessions
         const cookies = await chrome.cookies.getAll({ name: 'sid' });
         const activeOrgCookies = cookies.filter((cookie) => {
-            return cookie.domain.includes('.my.salesforce.com');
+            return cookie.domain.includes('.my.salesforce.com') || cookie.domain.includes('.my.site.com');
         });
         this.activeOrgCookies = activeOrgCookies;
 
